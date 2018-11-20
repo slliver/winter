@@ -10,6 +10,7 @@ public class BaseSearchCondition extends BaseCondition {
 
     private String name;
     private String phone;
+    private String code;
     // 渠道号
     private String channelNo;
     private String startTime;
@@ -63,5 +64,13 @@ public class BaseSearchCondition extends BaseCondition {
 
     public void setDevice(String device) {
         this.device = device;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

@@ -7,7 +7,9 @@ import com.slliver.common.Constant;
 import com.slliver.common.exception.RQServiceException;
 import com.slliver.common.mapper.RobinMapper;
 import com.slliver.common.paging.PageWapper;
+import com.slliver.common.utils.ContextUtil;
 import com.slliver.common.utils.UuidUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,11 @@ public class BaseService<T extends BaseDomain> {
             if (null == obj.getMakeTime()) {
                 obj.setMakeTime(makeTime);
             }
+
+            if(StringUtils.isBlank(obj.getMakeUser())){
+                obj.setMakeUser(ContextUtil.getCurrentUserPkid());
+            }
+
             // add by zhujinhua begin at 2017-1-19 12:10:10  对象保存时，添加默认修改时间及修改人
             if (null == obj.getModifyTime()) {
                 obj.setModifyTime(makeTime);

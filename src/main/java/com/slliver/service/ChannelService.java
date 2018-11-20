@@ -1,0 +1,89 @@
+package com.slliver.service;
+
+import com.github.pagehelper.PageHelper;
+import com.slliver.base.domain.BaseSearchCondition;
+import com.slliver.base.service.BaseService;
+import com.slliver.common.Constant;
+import com.slliver.common.paging.PageWapper;
+import com.slliver.dao.ApiChannelMapper;
+import com.slliver.entity.ApiChannel;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * @Description: 渠道维护
+ * @author: slliver
+ * @date: 2018/11/20 13:35
+ * @version: 1.0
+ */
+@Service
+public class ChannelService extends BaseService<ApiChannel> {
+
+    @Autowired
+    private ApiChannelMapper mapper;
+
+    public PageWapper<ApiChannel> selectListByPage(BaseSearchCondition condition) {
+        Integer pageNum = 0;
+        Integer pageSize = Constant.WEB_PAGE_SIZE;
+        if (condition != null) {
+            pageNum = condition.getPageNum() != null ? condition.getPageNum() : 0;
+            pageSize = condition.getPageSize() != null ? condition.getPageSize() : Constant.WEB_PAGE_SIZE;
+        }
+
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageWapper<>(this.mapper.selectListByPage(condition));
+    }
+
+    public List<ApiChannel> selectByCode(String code) {
+        Example example = new Example(ApiChannel.class);
+        example.createCriteria().andEqualTo("code", code);
+        return this.selectByExample(example);
+    }
+
+    /**
+     * 是否已经存在当前渠道编码
+     */
+    public boolean flagHaveChannelCode(ApiChannel channel) {
+        String code = channel.getCode();
+        if (StringUtils.isBlank(code)) {
+            return false;
+        }
+
+        List<ApiChannel> list = this.selectByCode(code);
+        if (CollectionUtils.isEmpty(list)) {
+            return false;
+        } else {
+            String pkid = channel.getPkid();
+            if (StringUtils.isNotBlank(pkid)) {
+                ApiChannel history = this.selectByPkid(pkid);
+                if (!Objects.equals(history.getPkid(), pkid)) {
+                    // 存在
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Integer saveOrUpdate(ApiChannel channel) {
+        String pkid = channel.getPkid();
+        if (StringUtils.isNotBlank(pkid)) {
+            return this.update(channel);
+        } else {
+            channel.setLevel((short) 0);
+            channel.setParentPkid("00");
+            return this.insert(channel);
+        }
+    }
+
+
+}

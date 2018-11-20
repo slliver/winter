@@ -47,6 +47,10 @@ public class BaseDomain implements Serializable {
     protected Date makeTime;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "make_user")
+    protected String makeUser;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "modify_time")
     protected Date modifyTime;
 
@@ -88,6 +92,14 @@ public class BaseDomain implements Serializable {
 
     public void setMakeTime(Date makeTime) {
         this.makeTime = makeTime;
+    }
+
+    public String getMakeUser() {
+        return makeUser;
+    }
+
+    public void setMakeUser(String makeUser) {
+        this.makeUser = makeUser;
     }
 
     public Date getModifyTime() {

@@ -41,31 +41,7 @@
             <li><a href="${ctx}/banner/list"><i class="fa fa-link"></i> <span>banner维护</span></a></li>
             <li><a href="${ctx}/message/edit"><i class="fa fa-link"></i> <span>首页消息管理</span></a></li>
             <li><a href="${ctx}/user/list"><i class="fa fa-link"></i> <span>用户管理</span></a></li>
-            <!--
-            <li class="treeview">
-                <a href="#"><i class="fa fa-share"></i> <span>Multilevel</span>
-                    <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-table"></i> <span>表格</span>
-                    <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 简单表格</a></li>
-                    <li class=""><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 数据表格</a></li>
-                </ul>
-            </li>
-            -->
+            <li><a href="${ctx}/channel/list"><i class="fa fa-link"></i> <span>渠道管理</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

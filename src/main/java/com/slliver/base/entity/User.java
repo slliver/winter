@@ -1,6 +1,7 @@
 package com.slliver.base.entity;
 
 import com.slliver.base.domain.BaseDomain;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -75,8 +76,6 @@ public class User extends BaseDomain {
     @Column(name = "expire_time")
     private Long expireTime;
 
-
-
     /**
      * 渠道号
      */
@@ -88,6 +87,12 @@ public class User extends BaseDomain {
      */
     @Column(name = "device")
     private String device;
+
+
+    /**
+     * 用户角色用户可以多角色
+     */
+    private String role;
 
     /**
      * 预留字段
@@ -217,6 +222,14 @@ public class User extends BaseDomain {
 
     public void setDevice(String device) {
         this.device = device;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getReserved1() {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slliver.dao.ApiChannelMapper">
+    <resultMap type="com.slliver.entity.ApiChannel" id="channelMap" extends="com.slliver.base.dao.ChannelMapper.BaseResultMap">
+
+    </resultMap>
+
+    <select id="selectListByPage" parameterType="com.slliver.base.domain.BaseSearchCondition" resultMap="channelMap">
+        SELECT * from channel c WHERE 1=1
+        <if test="code !=null and code !=''">
+            and c.code like concat("%", #{code}, "%")
+        </if>
+        <if test="name !=null and name !=''">
+            and c.name like concat("%", #{name}, "%")
+        </if>
+        ORDER by c.modify_time DESC
+    </select>
+</mapper>
