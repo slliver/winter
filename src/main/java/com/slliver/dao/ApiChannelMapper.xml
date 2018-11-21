@@ -15,4 +15,34 @@
         </if>
         ORDER by c.modify_time DESC
     </select>
+
+    <select id="selectListByUserPkid" parameterType="map" resultMap="channelMap">
+        SELECT
+            c.pkid,
+            c.`code`,
+            c.charge_user,
+            c.phone,
+            c.make_time,
+            CASE
+        WHEN (
+            SELECT
+                COUNT(1)
+            FROM
+                user_channel uc
+            WHERE
+                uc.flag_delete = 0
+            AND uc.channel_pkid = c.pkid
+            AND uc.user_pkid = #{userPkid}
+        ) > 0 THEN
+            '1'
+        ELSE
+            '0'
+        END AS checked
+        FROM
+            channel c
+        WHERE
+            c.flag_delete = 0
+        ORDER BY
+            c.make_time
+    </select>
 </mapper>

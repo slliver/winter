@@ -12,7 +12,7 @@ import javax.persistence.Transient;
  * @version: 1.0
  */
 @Table(name = "user")
-public class ApiUser extends User{
+public class ApiUser extends User {
 
     @Transient
     private String newPassword;

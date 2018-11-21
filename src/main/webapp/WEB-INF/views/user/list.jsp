@@ -88,18 +88,28 @@
 
                                 <div class="btn-group">
                                     <button type="submit" class="btn btn-primary" data-btn-type="search">查询</button>
-                                    <button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
-                                </div>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default " data-btn-type="add">新增</button>
-                                    <button type="button" class="btn btn-default" data-btn-type="edit">编辑</button>
-                                    <button type="button" class="btn btn-danger" data-btn-type="delete">删除</button>
                                 </div>
                             </div>
+                            <br/>
+                            <!-- 管理员操作权限按钮,暂时不开放 -->
+                            <c:if test="${sessionScope.sys_sessionUser.role == 'ADMIN'}">
+                                <div class="with-border form-inline box-header">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-primary" id="channelAuthorization">渠道授权</button>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-primary" id="btnEdit">编辑</button>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-danger" id="btnDelete">删除</button>
+                                    </div>
+                                </div>
+                            </c:if>
                             <div class="box-body">
                                 <table id="user_table" class="table table-border table-hover">
                                     <thead>
                                     <tr>
+                                        <th>操作</th>
                                         <th>用户名</th>
                                         <th>姓名</th>
                                         <th>昵称</th>
@@ -117,6 +127,9 @@
                                                     <c:when test="${status.index%2 == 0}"><tr class="odd"></c:when>
                                                     <c:otherwise><tr class="even"></c:otherwise>
                                                 </c:choose>
+                                                <td>
+                                                    <input type="checkbox" name="userPkid" value="${item.pkid}" data-pkid="${item.pkid}" data-flagversion="${item.flagVersion}" id="userPkidCheckbox_${status.index}"/>
+                                                </td>
                                                 <td>${item.userName}</td>
                                                 <td>${item.name}</td>
                                                 <td>${item.nickName}</td>
@@ -156,6 +169,11 @@
             </section>
         </form>
     </div>
+
+    <form id="authorizationForm" method="post">
+        <input type="text" name="userPkid" id="userPkid" value=""/>
+        <input type="text" name="channelPkid" id="channelPkid" value=""/>
+    </form>
     <!-- footer -->
     <footer class="main-footer text-center">
         <strong>Copyright &copy; 2018 <a href="http://www.slliver.com">slliver</a>.</strong> All rights reserved. <b>Email</b>：slliver@163.com
@@ -182,17 +200,29 @@
 <script src="${ctx}/static/common/json/json2.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script type="text/javascript" src="${ctx}/assets/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx}/assets/plugins/bootbox/bootbox.js"></script>
+<script type="text/javascript" src="${ctx}/assets/plugins/bootstrap-toastr/toastr.min.js"></script>
 <!-- FastClick -->
 <script src="${ctx}/assets/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <%--<script src="${ctx}/static/adminlte/dist/js/app.min.js"></script>--%>
 <!-- dataTable -->
+<script type="text/javascript" src="${ctx}/assets/plugins/jquery.blockui.min.js"></script>
 <script type="text/javascript" src="${ctx}/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${ctx}/assets/plugins/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- 自己实现的 datatables -->
 <script src="${ctx}/static/common/js/dataTables.js"></script>
 <!-- form 验证，暂时去掉，需要的时候在放开 -->
 <%--<script src="${ctx}/static/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js"></script>--%>
+
+
+<script type="text/javascript" src="${ctx}/static/js/common/jquery/jquery.md5.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/jquery/center-loader.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/jquery/jquery-ui-1.10.3.full.min.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/jquery/jquery.tips.js"></script>
+<script type="text/javascript" src="${ctx}/assets/scripts/jquery.form.min.js"></script>
+
+
 <script src="${ctx}/static/plugins/iCheck/icheck.min.js"></script>
 <!-- daterangepicker -->
 <!-- bootstrap-datepicker 的内容等同于datepicker -->
@@ -212,10 +242,17 @@
 <script type="text/javascript" src="${ctx}/static/common/js/base-datasource.js"></script>
 <script type="text/javascript" src="${ctx}/static/common/js/base-org.js"></script>
 
-<!-- datetimepicker -->
+<!-- 弹框需要的js -->
+<script type="text/javascript" src="${ctx}/assets/scripts/common.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/main.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/dialog.js"></script>
+
+<!-- datetimepicker 日期控件 -->
 <link rel="stylesheet" href="${ctx}/static/css/common/bootstrap/bootstrap-datetimepicker.min.css"/>
 <script type="text/javascript" src="${ctx}/static/js/common/bootstrap/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/common/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
 <script type="text/javascript">
     $(function () {
         //TC日期共同格式化 yyyy-MM-dd
@@ -225,6 +262,95 @@
             format: "yyyy-mm-dd",
             language: 'zh-CN',
             autoclose: true,
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function (){
+        /**
+         * 用户渠道授权
+         */
+        $("#btnEdit").unbind("click").bind("click", function (event) {
+            var userPkids = [];
+            $('input[name="userPkid"]:checked').each(function () {
+                userPkids.push($(this).val());
+            });
+
+            var ulength = userPkids.length;
+            if (ulength == 0) {
+                ZW.Model.error("请选择用户");
+                return;
+            }
+            if(ulength > 1){
+                ZW.Model.error("只能选择一个用户");
+                return;
+            }
+            var userPkid = userPkids[0];
+            window.location.href = ctx + '/user/' + userPkid + '/edit';
+        });
+
+
+        /**
+         * 用户渠道授权
+         */
+        $("#channelAuthorization").unbind("click").bind("click", function (event) {
+            var userPkids = [];
+            $('input[name="userPkid"]:checked').each(function () {
+                userPkids.push($(this).val());
+            });
+
+            var ulength = userPkids.length;
+            if (ulength == 0) {
+                ZW.Model.error("请选择用户");
+                return;
+            }
+            if(ulength > 1){
+                ZW.Model.error("只能选择一个用户");
+                return;
+            }
+            var userPkid = userPkids[0];
+            Dialog.channelDialog(userPkid, function (event) {
+                var pkids = [];
+                $('input[name="channelPkid"]:checked').each(function () {
+                    pkids.push($(this).val());
+                });
+                if (pkids.length == 0) {
+                    ZW.Model.error("请选择用户负责的渠道");
+                    return;
+                }
+
+                var array = new Array();
+                $('input[name="channelPkid"]:checked').each(function () {
+                    var $this = $(this);
+                    var userPkid = $this.data("userpkid");
+                    var channelPkid = $this.data("pkid");
+                    var obj = new Object();
+                    obj.userPkid = userPkid;
+                    obj.channelPkid = channelPkid;
+                    array.push(obj);
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: ctx+"/channel/authorization",
+                    contentType: "application/json;charset=utf-8",
+                    data:JSON.stringify(array),
+                    dataType: "json",
+                    success:function (data) {
+                        if (data.res == "1") {
+                            ZW.Model.info(data.message);
+                            $("#channelDialog").modal('hide');
+                        }else{
+                            ZW.Model.info(data.message);
+                        }
+                    },
+                    error:function (message) {
+                        ZW.Model.error(data.message);
+                    }
+                });
+                return true;
+            });
         });
     });
 </script>

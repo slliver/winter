@@ -42,7 +42,7 @@ public class ChannelService extends BaseService<ApiChannel> {
 
     public List<ApiChannel> selectByCode(String code) {
         Example example = new Example(ApiChannel.class);
-        example.createCriteria().andEqualTo("code", code);
+        example.createCriteria().andEqualTo("flagDelete", 0).andEqualTo("code", code);
         return this.selectByExample(example);
     }
 
@@ -85,5 +85,16 @@ public class ChannelService extends BaseService<ApiChannel> {
         }
     }
 
+    /**
+     * 选择系统中可用的渠道
+     */
+    public List<ApiChannel> selectList() {
+        Example example = new Example(ApiChannel.class);
+        example.createCriteria().andEqualTo("flagDelete", 0).andEqualTo("type", 10);
+        return this.selectByExample(example);
+    }
 
+    public List<ApiChannel> selectListByUserPkid(String userPkid) {
+        return this.mapper.selectListByUserPkid(userPkid);
+    }
 }
