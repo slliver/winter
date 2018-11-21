@@ -7,23 +7,27 @@ import javax.persistence.*;
 @Table(name = "user_channel")
 public class UserChannel extends BaseDomain {
     /**
-     * 渠道编号
+     * 用户pkid
      */
     @Column(name = "user_pkid")
     private String userPkid;
 
     /**
-     * banner名称
+     * 渠道PKID
      */
     @Column(name = "channel_pkid")
     private String channelPkid;
 
     /**
+     * 渠道编号
+     */
+    @Column(name = "channel_code")
+    private String channelCode;
+
+    /**
      * 备注
      */
     private String remark;
-
-
 
     /**
      * 获取渠道编号
@@ -59,6 +63,15 @@ public class UserChannel extends BaseDomain {
      */
     public void setChannelPkid(String channelPkid) {
         this.channelPkid = channelPkid;
+    }
+
+
+    public String getChannelCode() {
+        return channelCode;
+    }
+
+    public void setChannelCode(String channelCode) {
+        this.channelCode = channelCode;
     }
 
     /**

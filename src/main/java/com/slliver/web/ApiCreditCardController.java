@@ -27,8 +27,11 @@ import java.util.List;
 @RequestMapping("api/creditcard")
 public class ApiCreditCardController extends ApiBaseController<ApiCreditCard> {
 
+    /**
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+    **/
+
     @Autowired
     private ApiCreditCardService creditCardService;
 

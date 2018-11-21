@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="code" class="col-sm-2 control-label">渠道编码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="code" id="code" value="${channel.code}" maxlength="20" placeholder="请输入渠道编码"/>
+                                        <input type="text" class="form-control" name="code" id="code" value="${channel.code}" maxlength="20" placeholder="请输入渠道编码" readonly/>
                                     </div>
                                 </div>
                                 <div class="form-group">

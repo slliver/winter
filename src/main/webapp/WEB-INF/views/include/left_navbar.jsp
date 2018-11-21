@@ -36,12 +36,19 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">主导航</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="${ctx}/loan/list"><i class="fa fa-link"></i> <span>极速贷维护</span></a></li>
-            <li><a href="${ctx}/creditcard/list"><i class="fa fa-link"></i> <span>信用卡维护</span></a></li>
-            <li><a href="${ctx}/banner/list"><i class="fa fa-link"></i> <span>banner维护</span></a></li>
-            <li><a href="${ctx}/message/edit"><i class="fa fa-link"></i> <span>首页消息管理</span></a></li>
-            <li><a href="${ctx}/user/list"><i class="fa fa-link"></i> <span>用户管理</span></a></li>
-            <li><a href="${ctx}/channel/list"><i class="fa fa-link"></i> <span>渠道管理</span></a></li>
+            <!-- 系统管理员 -->
+            <c:if test="${sessionScope.sys_sessionUser.role == 'ADMIN'}">
+                <li class="active"><a href="${ctx}/loan/list"><i class="fa fa-link"></i> <span>极速贷维护</span></a></li>
+                <li><a href="${ctx}/creditcard/list"><i class="fa fa-link"></i> <span>信用卡维护</span></a></li>
+                <li><a href="${ctx}/banner/list"><i class="fa fa-link"></i> <span>banner维护</span></a></li>
+                <li><a href="${ctx}/message/edit"><i class="fa fa-link"></i> <span>首页消息管理</span></a></li>
+                <li><a href="${ctx}/user/list"><i class="fa fa-link"></i> <span>用户管理</span></a></li>
+                <li><a href="${ctx}/channel/list"><i class="fa fa-link"></i> <span>渠道管理</span></a></li>
+            </c:if>
+            <c:if test="${sessionScope.sys_sessionUser.role != 'ADMIN'}">
+                <!-- 渠道 -->
+                <li><a href="${ctx}/user/list"><i class="fa fa-link"></i> <span>用户管理</span></a></li>
+            </c:if>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

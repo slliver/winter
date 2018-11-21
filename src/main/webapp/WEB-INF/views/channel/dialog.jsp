@@ -25,7 +25,7 @@
                             <c:otherwise><tr class="even"></c:otherwise>
                         </c:choose>
                         <td>
-                            <input type="checkbox" name="channelPkid" value="${item.pkid}" data-pkid="${item.pkid}" data-userpkid="${userPkid}" id="checkbox_${status.index}" <c:if test="${item.checked == '1'}"> checked </c:if>/>
+                            <input type="checkbox" name="channelPkid" value="${item.pkid}" data-pkid="${item.pkid}" data-code="${item.code}" data-userpkid="${userPkid}" id="checkbox_${status.index}" <c:if test="${item.checked == '1'}"> checked </c:if>/>
                         </td>
                         <td>${item.code}</td>
                         <td>${item.name}</td>

@@ -8,6 +8,7 @@
         <id column="pkid" jdbcType="CHAR" property="pkid" />
         <result column="user_pkid" jdbcType="CHAR" property="userPkid" />
         <result column="channel_pkid" jdbcType="CHAR" property="channelPkid" />
+        <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="flag_sort" jdbcType="SMALLINT" property="flagSort" />
         <result column="flag_delete" jdbcType="SMALLINT" property="flagDelete" />

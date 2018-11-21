@@ -1,54 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- CSRF攻击防护 -->
-    <c:import url="/WEB-INF/views/include/header.jsp">
-        <c:param name="title">首页</c:param>
-    </c:import>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
-    <link rel="shortcut icon" type="image/x-icon" href="${ctx}/static/images/favicon.ico" media="screen">
-
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="${ctx}/assets/plugins/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="${ctx}/assets/plugins/font-awesome/css/font-awesome.min.css">
-    <!-- 自己实现的css -->
-    <link rel="stylesheet" href="${ctx}/static/common/css/base.css">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="${ctx}/static/common/libs/html5shiv/html5shiv.min.js"></script>
-    <script type="text/javascript" src="${ctx}/static/common/libs/respond/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- table and edit -->
-    <link rel="stylesheet" href="${ctx}/assets/plugins/datatables/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="${ctx}/assets/plugins/datatables/select.bootstrap.min.css">
-    <!-- bootstrap 自己的验证方式，暂时未启用 -->
-    <%--<link rel="stylesheet" href="${ctx}/assets/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>--%>
-    <link rel="stylesheet" href="${ctx}/static/plugins/iCheck/all.css">
-
-    <!-- daterangepicker -->
-    <!--<link rel="stylesheet" href="${ctx}/resources/adminlte/plugins/daterangepicker/daterangepicker.css">-->
-    <link rel="stylesheet" href="${ctx}/assets/plugins/datepicker/datepicker3.css">
-    <link rel="stylesheet" href="${ctx}/assets/plugins/select2/select2.min.css">
-    <!-- treeview -->
-    <link rel="stylesheet" href="${ctx}/assets/plugins/bootstrap-treeview/bootstrap-treeview.min.css"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="${ctx}/static/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="${ctx}/static/css/skins/_all-skins.min.css">
-
-
-</head>
-<body class="hold-transition skin-blue sidebar-mini fixed">
-<a name="main"></a>
+<c:import url="/WEB-INF/views/include/header.jsp">
+    <c:param name="title"></c:param>
+</c:import>
 <div class="wrapper">
-    <!-- Main Header -->
     <!-- Main Header -->
     <c:import url="/WEB-INF/views/include/header_navbar.jsp"/>
     <!-- Left side column. contains the logo and sidebar -->
@@ -105,6 +60,7 @@
                                     </div>
                                 </div>
                             </c:if>
+
                             <div class="box-body">
                                 <table id="user_table" class="table table-border table-hover">
                                     <thead>
@@ -170,17 +126,16 @@
         </form>
     </div>
 
-    <form id="authorizationForm" method="post">
-        <input type="text" name="userPkid" id="userPkid" value=""/>
-        <input type="text" name="channelPkid" id="channelPkid" value=""/>
-    </form>
-    <!-- footer -->
+
+    <!-- footer
     <footer class="main-footer text-center">
         <strong>Copyright &copy; 2018 <a href="http://www.slliver.com">slliver</a>.</strong> All rights reserved. <b>Email</b>：slliver@163.com
         <b>QQ</b>：35369468
         &nbsp;&nbsp;&nbsp;
         <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备16062522号</a>
     </footer>
+-->
+    <c:import url="/WEB-INF/views/include/footer.jsp"/>
     <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
@@ -325,9 +280,11 @@
                     var $this = $(this);
                     var userPkid = $this.data("userpkid");
                     var channelPkid = $this.data("pkid");
+                    var channelCode = $this.data("code");
                     var obj = new Object();
                     obj.userPkid = userPkid;
                     obj.channelPkid = channelPkid;
+                    obj.channelCode = channelCode;
                     array.push(obj);
                 });
 
