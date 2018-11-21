@@ -61,7 +61,7 @@
                                                 <tr>
                                                     <td>
                                                         <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href = '${ctx}/channel/${item.pkid}/edit'">编辑</button>
-                                                        <%--<button type="button" class="btn btn-primary btn-sm btn-delete" data-pkid="${item.pkid}" data-flagVesion="${item.flagVersion}">删除</button>--%>
+                                                        <button type="button" class="btn btn-primary btn-sm btn-delete" data-pkid="${item.pkid}" data-flagVesion="${item.flagVersion}">删除</button>
                                                     </td>
                                                     <td>${item.code}</td>
                                                     <td>${item.name}</td>
@@ -109,6 +109,11 @@
 </div>
 <script type="text/javascript" src="${ctx}/static/common/js/base-modal.js"></script>
 </body>
+<!-- 弹框需要的js -->
+<script type="text/javascript" src="${ctx}/assets/scripts/common.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/main.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/common/dialog.js"></script>
+
 <script type="text/javascript">
     var ctx = '${ctx}';
     $(".btn-delete").each(function () {
@@ -116,25 +121,32 @@
             // 获取当前操作的pkid以及flagVersion
             var pkid = $(this).attr("data-pkid");
             var flagVersion = $(this).attr("data-flagVesion");
-            var record = {};
+            var record = new Object();
             record.pkid = pkid;
             record.flagVersion = flagVersion;
-            var array = [];
+            var array = new Array();
             array.push(record);
-            if (window.confirm("确定删除当前数据么?")) {
-                window.location.href = ctx + '/loan/' + pkid + '/delete';
-            }
-            <!--
-            ZW.Model.confirm("确定删除当前数据?", function () {
 
-                ZW.Ajax.doRequestWithJsonBody(null, ctx +'/loan/delete', array, function(data){
-                    ZW.Model.info("删除成功", "提示", function() {
-                        $("#queryForm").attr("action", ctx + "/loan/list");
-                        $("#queryForm").submit();
-                    });
-                });
+
+            $.ajax({
+                type: "POST",
+                url: ctx+"/channel/delete",
+                contentType: "application/json;charset=utf-8",
+                data:JSON.stringify(array),
+                dataType: "json",
+                success:function (data) {
+                    if (data.res == "1") {
+                        ZW.Model.info(data.message);
+                        alert("删除成功");
+                        window.location.reload();
+                    }else{
+                        ZW.Model.info(data.message);
+                    }
+                },
+                error:function (message) {
+                    ZW.Model.error(data.message);
+                }
             });
-            -->
         });
     });
 </script>

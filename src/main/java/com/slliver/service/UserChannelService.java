@@ -18,10 +18,15 @@ public class UserChannelService extends BaseService<ApiUserChannel> {
 
     public List<ApiUserChannel> selectByUserPkid(String userPkid){
         Example example = new Example(ApiUserChannel.class);
-        example.createCriteria().andEqualTo("userPkid", userPkid);
+        example.createCriteria().andEqualTo("flagDelete", 0).andEqualTo("userPkid", userPkid);
         return this.selectByExample(example);
     }
 
+    public List<ApiUserChannel> selectByChannelPkid(String channelPkid){
+        Example example = new Example(ApiUserChannel.class);
+        example.createCriteria().andEqualTo("flagDelete", 0).andEqualTo("channelPkid", channelPkid);
+        return this.selectByExample(example);
+    }
 
     public Integer saveAuthorization(ApiUserChannel[] items){
         if(items == null || items.length == 0){
@@ -40,5 +45,10 @@ public class UserChannelService extends BaseService<ApiUserChannel> {
         }
 
         return 1;
+    }
+
+    public void deleteByChannelPkid(String channelPkid){
+        List<ApiUserChannel> list = this.selectByChannelPkid(channelPkid);
+        this.deleteBatchLogically(list);
     }
 }

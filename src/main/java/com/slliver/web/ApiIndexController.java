@@ -32,9 +32,10 @@ import java.util.List;
 @RestController
 @RequestMapping("api/index")
 public class ApiIndexController extends ApiBaseController {
-
+    /**
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+    **/
     @Autowired
     private ApiLoanDataService loanDataService;
     @Autowired

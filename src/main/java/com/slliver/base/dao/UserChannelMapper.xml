@@ -15,6 +15,7 @@
         <result column="flag_version" jdbcType="BIGINT" property="flagVersion" />
         <result column="make_time" jdbcType="TIMESTAMP" property="makeTime" />
         <result column="make_user" jdbcType="CHAR" property="makeUser" />
+        <result column="modify_user" property="modifyUser" jdbcType="CHAR"/>
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     </resultMap>
 </mapper>

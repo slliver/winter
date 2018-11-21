@@ -2,14 +2,12 @@ package com.slliver.web;
 
 import com.slliver.base.controller.WebBaseController;
 import com.slliver.base.domain.BaseSearchCondition;
-import com.slliver.base.entity.UserChannel;
 import com.slliver.common.domain.AjaxRichResult;
 import com.slliver.common.paging.PageWapper;
 import com.slliver.entity.ApiChannel;
 import com.slliver.entity.ApiUserChannel;
-import com.slliver.service.UserChannelService;
 import com.slliver.service.ChannelService;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import com.slliver.service.UserChannelService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -103,6 +101,21 @@ public class ChannelController extends WebBaseController<ApiChannel> {
         } catch (Exception e) {
             logger.error(e.toString(), e);
             result.setFailMsg("授权失败");
+        }
+        return result;
+    }
+
+
+    @PostMapping(value = "delete")
+    @ResponseBody
+    public AjaxRichResult delete(@RequestBody ApiChannel[] channels) {
+        AjaxRichResult result = new AjaxRichResult();
+        try {
+            int sresult = this.channelService.delete(channels);
+            result.setSucceed(sresult > 0 ? "删除成功" : "删除失败");
+        } catch (Exception e) {
+            logger.error(e.toString(), e);
+            result.setFailMsg("删除失败");
         }
         return result;
     }

@@ -28,7 +28,7 @@
         <result column="flag_delete" jdbcType="SMALLINT" property="flagDelete"/>
         <result column="flag_version" jdbcType="BIGINT" property="flagVersion"/>
         <result column="make_time" jdbcType="TIMESTAMP" property="makeTime"/>
-        <result column="make_user" jdbcType="VARCHAR" property="makeUser"/>
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="modify_user" jdbcType="VARCHAR" property="modify_user"/>
     </resultMap>
 </mapper>

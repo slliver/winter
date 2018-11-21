@@ -40,9 +40,6 @@ import java.util.Map;
 @CrossOrigin
 public class LoginController extends WebBaseController<BaseDomain> {
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
-
     @GetMapping(value = "/loginIndex")
     public String loginIndex() {
         return getViewPath("login");
@@ -124,53 +121,6 @@ public class LoginController extends WebBaseController<BaseDomain> {
         //逐渐积累要清空的session属性。
         session.removeAttribute(Constant.SESSION_KEY.USER);
         session.removeAttribute(Constant.SESSION_KEY.MENULIST);
-    }
-
-    /**
-     * 访问登录页
-     */
-    @RequestMapping(value = "/login1")
-    public ModelAndView loginGo() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("login/login");
-        String KEY_NAME = "name";
-        ValueOperations valueOperations = redisTemplate.opsForValue();
-        // 设置序列化格式
-        redisTemplate.setValueSerializer(new GenericToStringSerializer<>(String.class));
-        String name = (String) valueOperations.get(KEY_NAME);
-        logger.info("redis server  === >>> " + name);
-
-        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
-        ServletContext servletContext = webApplicationContext.getServletContext();
-
-
-        String contextPath = WebUtils.getContextPath(getRequest());
-        logger.info("contextPath  == >> " + contextPath);
-
-        // 当前访问地址
-        String requestUri = WebUtils.getRequestUri(getRequest());
-        logger.info("requestUri  == >> " + requestUri);
-
-        System.out.println("*****************************************************************************************");
-        // 需求：请把整个http请求的消息全部获取
-        /**
-         String token = "";
-         HttpServletRequest request = getRequest();
-         Enumeration<String> headers= request.getHeaderNames();
-         while(headers.hasMoreElements()){
-         // 取出消息头的名字
-         String headername = headers.nextElement();
-         if(StringUtils.isNotBlank(headername)){
-         if(Objects.equals("token", headername.toLowerCase())){
-         token = request.getHeader(headername);
-         }
-         }
-         logger.info(headername +": == >> "+ request.getHeader(headername));
-         }
-
-         System.out.println("token === >> " + token);
-         **/
-        return mv;
     }
 
     @Override

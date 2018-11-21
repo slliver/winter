@@ -32,8 +32,10 @@ public class ApiTokenInterceptor extends HandlerInterceptorAdapter {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+    **/
 
     /**
      * 从配置文件中获取值，控制哪些url可以没有token就访问

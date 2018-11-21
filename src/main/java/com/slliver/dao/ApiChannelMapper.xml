@@ -6,7 +6,7 @@
     </resultMap>
 
     <select id="selectListByPage" parameterType="com.slliver.base.domain.BaseSearchCondition" resultMap="channelMap">
-        SELECT * from channel c WHERE 1=1
+        SELECT * from channel c WHERE flag_delete = 0
         <if test="code !=null and code !=''">
             and c.code like concat("%", #{code}, "%")
         </if>

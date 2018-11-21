@@ -54,6 +54,12 @@ public class BaseDomain implements Serializable {
     @Column(name = "modify_time")
     protected Date modifyTime;
 
+
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "modify_user")
+    protected String modifyUser;
+
     public String getPkid() {
         return pkid;
     }
@@ -108,6 +114,14 @@ public class BaseDomain implements Serializable {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getModifyUser() {
+        return modifyUser;
+    }
+
+    public void setModifyUser(String modifyUser) {
+        this.modifyUser = modifyUser;
     }
 
     @Override

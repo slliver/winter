@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisTokenManager implements TokenManager {
 
+
     private RedisTemplate redisTemplate;
 
     @Autowired

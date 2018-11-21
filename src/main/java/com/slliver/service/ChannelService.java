@@ -28,6 +28,9 @@ public class ChannelService extends BaseService<ApiChannel> {
     @Autowired
     private ApiChannelMapper mapper;
 
+    @Autowired
+    private UserChannelService userChannelService;
+
     public PageWapper<ApiChannel> selectListByPage(BaseSearchCondition condition) {
         Integer pageNum = 0;
         Integer pageSize = Constant.WEB_PAGE_SIZE;
@@ -96,5 +99,21 @@ public class ChannelService extends BaseService<ApiChannel> {
 
     public List<ApiChannel> selectListByUserPkid(String userPkid) {
         return this.mapper.selectListByUserPkid(userPkid);
+    }
+
+    public Integer delete(ApiChannel[] items) {
+        if (items == null || items.length == 0) {
+            return 0;
+        }
+
+        for(ApiChannel item : items){
+            String channelPkid = item.getPkid();
+            // 删除用户关联的渠道
+            userChannelService.deleteByChannelPkid(channelPkid);
+            // 删除渠道
+            this.deleteLogically(channelPkid);
+        }
+
+        return 1;
     }
 }

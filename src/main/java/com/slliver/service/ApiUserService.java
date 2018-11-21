@@ -109,6 +109,8 @@ public class ApiUserService extends BaseService<ApiUser> {
         user.setAccessToken(token);
         // 用户注册渠道 add 2018-11-19
         user.setChannelNo(apiUser.getChannelNo());
+        // 用户注册设备
+        user.setDevice(apiUser.getDevice());
         user.setExpireDate(expireDate);
         user.setExpireTime(expireTime);
         this.insert(user);
