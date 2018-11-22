@@ -59,6 +59,7 @@
                                     <th>申请人数</th>
                                     <th>标签</th>
                                     <th>适用设备</th>
+                                    <th>优先级</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -98,6 +99,7 @@
                                                 <td>${item.totalApply}</td>
                                                 <td>${item.label}</td>
                                                 <td>${robinFn:getDeviceValue(item.device)}</td>
+                                                <td>${item.priority}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>

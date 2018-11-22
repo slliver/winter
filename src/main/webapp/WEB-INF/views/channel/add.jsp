@@ -30,6 +30,7 @@
                         </div>
                         <form id="addForm" method="POST" onsubmit="return false;" action="${ctx}/channel/update" class="form-horizontal">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="serverPath" id="serverPath" value="${serverPath}"/>
                             <!-- type 10：渠道 -->
                             <input type="hidden" name="type" value="10"/>
                             <div class="box-body">
@@ -57,6 +58,18 @@
                                         <input type="text" class="form-control" name="phone" id="phone" maxlength="20" placeholder="请输入联系电话"/>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="phone" class="col-sm-2 control-label">推广链接</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control copy-input" name="url" id="popularizeUrl" value="" maxlength="200" placeholder="请输入推广链接"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" id="btn-generate" name="generate" class="btn btn-primary btn-sm">生成连接</button>
+                                        <button type="button" id="btn-copy" name="generate" class="btn btn-primary btn-sm">复制连接</button>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="remark" class="col-sm-2 control-label">备注</label>
                                     <div class="col-sm-10">
@@ -75,16 +88,51 @@
         </section>
     </div>
     <c:import url="/WEB-INF/views/include/footer.jsp"/>
+    <script type="text/javascript" src="${ctx}/assets/plugins/jquery.zclip/jquery.zclip.js"></script>
 </div>
 </body>
 <script type="text/javascript">
     var ctx = '${ctx}';
     $(function () {
+        $("#btn-generate").unbind("click").bind("click", function (event) {
+            var code = $("#code").val();
+            if(code == "" || code == null){
+                alert("请输入渠道号");
+                $("#popularizeUrl").val('');
+                return;
+            }
+
+            var serverPath = $("#serverPath").val();
+            if(serverPath == "" || serverPath == null){
+                alert("获取服务器地址失败");
+                return;
+            }
+
+            var url = serverPath + "/" + "?channelNo=" + code;
+            $("#popularizeUrl").val(url);
+        });
+
+        $("#btn-copy").zclip({
+            path: "${ctx}/assets/plugins/jquery.zclip/ZeroClipboard.swf",
+            copy: function(){
+                var popularizeUrl = $("#popularizeUrl").val();
+                if(popularizeUrl == "" || code == popularizeUrl){
+                    alert("还没生成推广连接，请先生成推广连接");
+                    return;
+                }
+                return $("#popularizeUrl").val();
+            },
+            afterCopy:function(){/* 复制成功后的操作 */
+                alert("复制成功");
+            }
+        });
+
         $("#btn-cancel").unbind("click").bind("click", function (event) {
             window.location.href = ctx + "/channel/list";
         });
 
         $("#btn-submit").unbind("click").bind("click", function (event) {
+            generateUrl();
             ZW.Ajax.doRequest("addForm", ctx + "/channel/update", "", function (data) {
                 // 失败
                 if (data.res == 0) {
@@ -97,5 +145,12 @@
             })
         });
     });
+
+    function generateUrl() {
+        var code = $("#code").val();
+        var serverPath = $("#serverPath").val();
+        var url = serverPath + "/" + "?channelNo=" + code;
+        $("#popularizeUrl").val(url);
+    }
 </script>
 </html>

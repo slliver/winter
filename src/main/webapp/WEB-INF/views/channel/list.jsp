@@ -34,10 +34,7 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">
-                                    <button type="button" id="addLoan" name="addLoan"
-                                            class="btn btn-block btn-primary btn-sm"
-                                            onclick="window.location.href = '${ctx}/channel/add'">添加
-                                    </button>
+                                    <button type="button" id="addLoan" name="addLoan" class="btn btn-block btn-primary btn-sm" onclick="window.location.href = '${ctx}/channel/add'">添加</button>
                                 </h3>
                             </div>
                             <!-- /.box-header -->
@@ -50,8 +47,8 @@
                                         <th>渠道名称</th>
                                         <th>负责人</th>
                                         <th>联系电话</th>
+                                        <th>推广连接</th>
                                         <th>创建时间</th>
-                                        <th>备注</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -61,14 +58,14 @@
                                                 <tr>
                                                     <td>
                                                         <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href = '${ctx}/channel/${item.pkid}/edit'">编辑</button>
-                                                        <button type="button" class="btn btn-primary btn-sm btn-delete" data-pkid="${item.pkid}" data-flagVesion="${item.flagVersion}">删除</button>
+                                                        <button type="button" class="btn btn-danger btn-sm btn-delete" data-pkid="${item.pkid}" data-flagVesion="${item.flagVersion}">删除</button>
                                                     </td>
                                                     <td>${item.code}</td>
                                                     <td>${item.name}</td>
                                                     <td>${item.chargeUser}</td>
                                                     <td>${item.phone}</td>
+                                                    <td>${item.url}</td>
                                                     <td><fmt:formatDate value='${item.makeTime}' pattern='yyyy-MM-dd HH:mm'/></td>
-                                                    <td>${item.remark}</td>
                                                 </tr>
                                             </c:forEach>
                                         </c:when>

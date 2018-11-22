@@ -33,6 +33,7 @@
                             <input type="hidden" name="pkid" value="${channel.pkid}"/>
                             <input type="hidden" name="flagVersion" value="${channel.flagVersion}"/>
                             <input type="hidden" name="type" value="10"/>
+                            <input type="hidden" name="serverPath" id="serverPath" value="${serverPath}"/>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="code" class="col-sm-2 control-label">渠道编码</label>
@@ -58,6 +59,20 @@
                                         <input type="text" class="form-control" name="phone" id="phone" maxlength="20" value="${channel.phone}" placeholder="请输入联系电话"/>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="phone" class="col-sm-2 control-label">推广链接</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control copy-input" name="url" id="popularizeUrl" value="${channel.url}" maxlength="200" placeholder="请输入推广链接" readonly/>
+                                    </div>
+                                    <!--
+                                    <div class="col-sm-2">
+                                        <button type="button" id="btn-generate" name="generate" class="btn btn-primary btn-sm">生成连接</button>
+                                        <button type="button" id="btn-copy" name="generate" class="btn btn-primary btn-sm">复制连接</button>
+                                    </div>
+                                    -->
+                                </div>
+
                                 <div class="form-group">
                                     <label for="remark" class="col-sm-2 control-label">备注</label>
                                     <div class="col-sm-10">
@@ -76,6 +91,7 @@
         </section>
     </div>
     <c:import url="/WEB-INF/views/include/footer.jsp"/>
+    <script type="text/javascript" src="${ctx}/assets/plugins/jquery.zclip/jquery.zclip.js"></script>
 </div>
 </body>
 <script type="text/javascript">
