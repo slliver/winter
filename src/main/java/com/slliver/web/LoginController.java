@@ -40,18 +40,6 @@ import java.util.Map;
 @CrossOrigin
 public class LoginController extends WebBaseController<BaseDomain> {
 
-    /**
-    @GetMapping(value = "")
-    public String index(HttpServletRequest request) {
-        ApiUser sessionUser = (ApiUser) WebUtils.getSessionAttribute(request, Constant.SESSION_KEY.USER);
-        if(sessionUser == null){
-            return getViewPath("login");
-        }
-
-        return "redirect:/index/index";
-    }
-    **/
-
     @GetMapping(value = "/loginIndex")
     public String loginIndex(HttpServletRequest request) {
         ApiUser sessionUser = (ApiUser) WebUtils.getSessionAttribute(request, Constant.SESSION_KEY.USER);
