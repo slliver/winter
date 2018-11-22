@@ -13,7 +13,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -40,9 +40,26 @@ import java.util.Map;
 @CrossOrigin
 public class LoginController extends WebBaseController<BaseDomain> {
 
+    /**
+    @GetMapping(value = "")
+    public String index(HttpServletRequest request) {
+        ApiUser sessionUser = (ApiUser) WebUtils.getSessionAttribute(request, Constant.SESSION_KEY.USER);
+        if(sessionUser == null){
+            return getViewPath("login");
+        }
+
+        return "redirect:/index/index";
+    }
+    **/
+
     @GetMapping(value = "/loginIndex")
-    public String loginIndex() {
-        return getViewPath("login");
+    public String loginIndex(HttpServletRequest request) {
+        ApiUser sessionUser = (ApiUser) WebUtils.getSessionAttribute(request, Constant.SESSION_KEY.USER);
+        if(sessionUser == null){
+            return getViewPath("login");
+        }
+
+        return "redirect:/index/index";
     }
 
     @PostMapping(value = "/login")
