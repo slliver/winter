@@ -54,14 +54,10 @@ public class CreditCard extends BaseDomain {
      */
     private Short device;
 
-    public Short getDevice() {
-        return device;
-    }
-
-    public void setDevice(Short device) {
-        this.device = device;
-    }
-
+    /**
+     *  优先级
+     */
+    private Short priority;
 
     /**
      * 预留字段
@@ -233,5 +229,21 @@ public class CreditCard extends BaseDomain {
      */
     public void setReserved2(String reserved2) {
         this.reserved2 = reserved2;
+    }
+
+    public Short getDevice() {
+        return device;
+    }
+
+    public void setDevice(Short device) {
+        this.device = device;
+    }
+
+    public Short getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Short priority) {
+        this.priority = priority;
     }
 }

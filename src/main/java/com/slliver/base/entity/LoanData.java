@@ -89,13 +89,10 @@ public class LoanData extends BaseDomain {
      */
     private Short device;
 
-    public Short getDevice() {
-        return device;
-    }
-
-    public void setDevice(Short device) {
-        this.device = device;
-    }
+    /**
+     *  优先级
+     */
+    private Short priority;
 
     /**
      * 预留字段
@@ -385,5 +382,21 @@ public class LoanData extends BaseDomain {
      */
     public void setReserved5(String reserved5) {
         this.reserved5 = reserved5;
+    }
+
+    public Short getDevice() {
+        return device;
+    }
+
+    public void setDevice(Short device) {
+        this.device = device;
+    }
+
+    public Short getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Short priority) {
+        this.priority = priority;
     }
 }

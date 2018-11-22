@@ -56,6 +56,9 @@ public class ApiLoanDataService extends BaseService<ApiLoanData> {
     }
 
     public boolean save(ApiLoanData loan) {
+        if(loan.getPriority() == null){
+            loan.setPriority((short) 999);
+        }
         int count = this.insert(loan);
         if (count == 0) {
             return false;
@@ -103,6 +106,9 @@ public class ApiLoanDataService extends BaseService<ApiLoanData> {
         }
 
         // 更新自己
+        if(loan.getPriority() == null){
+            loan.setPriority((short) 999);
+        }
         this.update(loan);
         // 更新对应的明细信息
         saveOrUpdateDetail(loan);

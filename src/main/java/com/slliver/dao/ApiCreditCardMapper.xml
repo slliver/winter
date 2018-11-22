@@ -16,7 +16,8 @@
             l.bank_des,
             l.banner_pkid,
             r.url AS http_url,
-            l.device
+            l.device,
+            l.priority
         FROM
             credit_card l
         LEFT JOIN resource r ON l.logo_pkid = r.pkid
@@ -25,7 +26,7 @@
             and l.device = #{device}
         </if>
         ORDER BY
-            l.modify_time DESC
+          l.priority,l.make_time
     </select>
 
 </mapper>

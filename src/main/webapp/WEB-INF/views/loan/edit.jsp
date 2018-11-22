@@ -53,6 +53,15 @@
                                         </c:if>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="orgName" class="col-sm-2 control-label">优先级</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="priority" id="priority" value="${loan.priority}" maxlength="3" placeholder="请输入优先级，没有可以不输入" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                               onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+                                    </div>
+                                    <label for="orgNameLable" class="col-sm-4 control-label" style="text-align: left;"><span style="color: red;">如果没有优先级请输入999</span></label>
+                                </div>
                                 <div class="form-group">
                                     <label for="device" class="col-sm-2 control-label">适用设备</label>
                                     <div class="col-sm-10">
