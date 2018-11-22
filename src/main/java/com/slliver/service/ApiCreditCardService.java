@@ -56,6 +56,9 @@ public class ApiCreditCardService extends BaseService<ApiCreditCard> {
      * 保存
      */
     public boolean save(ApiCreditCard card) {
+        if(card.getPriority() == null){
+            card.setPriority((short) 999);
+        }
         int count = this.insert(card);
         if (count == 0) {
             return false;
@@ -63,6 +66,7 @@ public class ApiCreditCardService extends BaseService<ApiCreditCard> {
         if (StringUtils.isNotBlank(card.getBannerPkid())) {
             ApiBanner banner = bannerService.selectByPkid(card.getBannerPkid());
             banner.setBussinessPkid(card.getPkid());
+
             this.bannerService.update(banner);
         }
 
@@ -102,6 +106,9 @@ public class ApiCreditCardService extends BaseService<ApiCreditCard> {
         }
 
         // 更新自己
+        if(card.getPriority() == null){
+            card.setPriority((short) 999);
+        }
         this.update(card);
         return true;
     }
