@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Description: 用一句话具体描述类的功能
+ * @Description: 处理一些特殊的请求
  * @author: slliver
  * @date: 2018/11/22 16:47
  * @version: 1.0
