@@ -1,10 +1,12 @@
 package com.slliver.service;
 
 import com.github.pagehelper.PageHelper;
+import com.slliver.base.domain.BaseDomain;
 import com.slliver.base.domain.BaseSearchCondition;
 import com.slliver.base.service.BaseService;
 import com.slliver.common.Constant;
 import com.slliver.common.paging.PageWapper;
+import com.slliver.common.utils.RedisUtil;
 import com.slliver.dao.ApiLoanDataMapper;
 import com.slliver.entity.ApiBanner;
 import com.slliver.entity.ApiLoanData;
@@ -16,10 +18,14 @@ import org.apache.commons.collections.ComparatorUtils;
 import org.apache.commons.collections.comparators.ComparableComparator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundListOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description: 用一句话具体描述类的功能
@@ -51,12 +57,13 @@ public class ApiLoanDataService extends BaseService<ApiLoanData> {
         }
 
         PageHelper.startPage(pageNum, pageSize);
-        List<ApiLoanData> list = this.mapper.selectListByPage(condition);
-        return new PageWapper<>(list);
+        List<ApiLoanData> loanDataList = this.mapper.selectListByPage(condition);
+        return new PageWapper<>(loanDataList);
     }
 
+
     public boolean save(ApiLoanData loan) {
-        if(loan.getPriority() == null){
+        if (loan.getPriority() == null) {
             loan.setPriority((short) 999);
         }
         int count = this.insert(loan);
@@ -106,7 +113,7 @@ public class ApiLoanDataService extends BaseService<ApiLoanData> {
         }
 
         // 更新自己
-        if(loan.getPriority() == null){
+        if (loan.getPriority() == null) {
             loan.setPriority((short) 999);
         }
         this.update(loan);
