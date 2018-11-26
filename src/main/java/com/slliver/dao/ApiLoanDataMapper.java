@@ -10,4 +10,5 @@ public interface ApiLoanDataMapper extends RobinMapper<ApiLoanData> {
 
     List<ApiLoanData> selectListByPage(BaseSearchCondition condition);
 
+    List<ApiLoanData> selectListByApi(BaseSearchCondition condition);
 }

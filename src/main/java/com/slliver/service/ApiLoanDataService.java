@@ -61,6 +61,22 @@ public class ApiLoanDataService extends BaseService<ApiLoanData> {
         return new PageWapper<>(loanDataList);
     }
 
+    /**
+     * 接口使用
+     */
+    public PageWapper<ApiLoanData> selectListByApi(BaseSearchCondition condition) {
+        Integer pageNum = 0;
+        Integer pageSize = Constant.WEB_PAGE_SIZE;
+        if (condition != null) {
+            pageNum = condition.getPageNum() != null ? condition.getPageNum() : 0;
+            pageSize = condition.getPageSize() != null ? condition.getPageSize() : Constant.WEB_PAGE_SIZE;
+        }
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<ApiLoanData> loanDataList = this.mapper.selectListByApi(condition);
+        return new PageWapper<>(loanDataList);
+    }
+
 
     public boolean save(ApiLoanData loan) {
         if (loan.getPriority() == null) {

@@ -3,10 +3,8 @@ package com.slliver.web;
 import com.slliver.base.controller.ApiBaseController;
 import com.slliver.base.domain.BaseSearchCondition;
 import com.slliver.common.Constant;
-import com.slliver.common.domain.ApiMessage;
 import com.slliver.common.domain.ApiRichResult;
 import com.slliver.common.paging.PageWapper;
-import com.slliver.common.utils.TokenUtil;
 import com.slliver.entity.ApiBanner;
 import com.slliver.entity.ApiIndexMessage;
 import com.slliver.entity.ApiLoanData;
@@ -15,10 +13,11 @@ import com.slliver.service.BannerService;
 import com.slliver.service.IndexMessageService;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -55,7 +54,7 @@ public class ApiIndexController extends ApiBaseController {
 //        System.out.println("从缓存中获取用户 pkid === >> " + userPkid);
         logger.info("从请求中获取token == >> " + request.getAttribute(Constant.REQUEST_TOKEN));
 //        System.out.println("token  === >> " + token);
-        PageWapper<ApiLoanData> page = loanDataService.selectListByPage(condition);
+        PageWapper<ApiLoanData> page = loanDataService.selectListByApi(condition);
         if(page != null){
             List<ApiLoanData> list = page.getList();
             for (ApiLoanData loan : list) {

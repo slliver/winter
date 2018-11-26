@@ -6,13 +6,13 @@ import com.slliver.common.Constant;
 import com.slliver.common.domain.ApiRichResult;
 import com.slliver.common.paging.PageWapper;
 import com.slliver.entity.ApiCreditCard;
-import com.slliver.entity.ApiLoanData;
 import com.slliver.service.ApiCreditCardService;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ApiCreditCardController extends ApiBaseController<ApiCreditCard> {
         ApiRichResult result = new ApiRichResult();
         // 获取用户信息,从缓存中获取用户信息
 //        String userPkid = redisTemplate.opsForValue().get(token);
-        PageWapper<ApiCreditCard> page = creditCardService.selectListByPage(condition);
+        PageWapper<ApiCreditCard> page = creditCardService.selectListByApi(condition);
         if (page != null) {
             List<ApiCreditCard> list = page.getList();
             for (ApiCreditCard card : list) {

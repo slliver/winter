@@ -45,6 +45,19 @@ public class ApiCreditCardService extends BaseService<ApiCreditCard> {
         return new PageWapper<>(list);
     }
 
+    public PageWapper<ApiCreditCard> selectListByApi(BaseSearchCondition condition) {
+        Integer pageNum = 0;
+        Integer pageSize = Constant.API_PAGE_SIZE;
+        if (condition != null) {
+            pageNum = condition.getPageNum() != null ? condition.getPageNum() : 0;
+            pageSize = condition.getPageSize() != null ? condition.getPageSize() : pageSize;
+        }
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<ApiCreditCard> list = this.mapper.selectListByApi(condition);
+        return new PageWapper<>(list);
+    }
+
     public ApiCreditCard selectByCardName(String cardName) {
         Example example = new Example(ApiCreditCard.class);
         example.createCriteria().andEqualTo("cardName", cardName);

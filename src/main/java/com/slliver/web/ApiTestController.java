@@ -4,7 +4,6 @@ import com.slliver.base.controller.ApiBaseController;
 import com.slliver.base.domain.BaseSearchCondition;
 import com.slliver.common.Constant;
 import com.slliver.common.domain.ApiRichResult;
-import com.slliver.common.domain.UserToken;
 import com.slliver.common.domain.UserValidate;
 import com.slliver.common.paging.PageWapper;
 import com.slliver.common.utils.CipherUtil;
@@ -17,15 +16,12 @@ import com.slliver.service.ApiLoanDataService;
 import com.slliver.service.ApiSmsCodeService;
 import com.slliver.service.ApiUserService;
 import com.slliver.service.IndexMessageService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * @Description: 用一句话具体描述类的功能
@@ -105,7 +101,7 @@ public class ApiTestController extends ApiBaseController {
         ApiRichResult result = new ApiRichResult();
         // 获取用户信息
         String userPkid = TokenUtil.getUserPkid(token);
-        PageWapper<ApiLoanData> page = loanDataService.selectListByPage(condition);
+        PageWapper<ApiLoanData> page = loanDataService.selectListByApi(condition);
         result.setSucceed(page, "接口调用成功, 当前第" + page.getPageNum() + "页");
         return result;
     }
