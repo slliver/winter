@@ -199,6 +199,10 @@ public class ApiUserService extends BaseService<ApiUser> {
         // 验证手机号码是否已经注册
         ApiUser user = this.userService.selectByPhone(phone);
         if (user != null) {
+            // 更新用户设备为当前设备信息 2018-11-26 10:12
+            user.setDevice(apiUser.getDevice());
+            this.userService.update(user);
+
             validate.setStatusCode(ValidationConstant.PHOME_HAS_REGISTER);
             validate.setMessage(ValidationConstant.getStatusCodeMessage(ValidationConstant.PHOME_HAS_REGISTER));
             validate.setToken(user.getAccessToken());
