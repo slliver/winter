@@ -48,6 +48,7 @@
                             <br/>
                             <!-- 管理员操作权限按钮,暂时不开放 -->
                             <c:if test="${sessionScope.sys_sessionUser.role == 'ADMIN'}">
+                                <!--
                                 <div class="with-border form-inline box-header">
                                     <div class="input-group input-group-sm">
                                         <button type="button" class="btn btn-primary" id="channelAuthorization">渠道授权</button>
@@ -59,6 +60,7 @@
                                         <button type="button" class="btn btn-danger" id="btnDelete">删除</button>
                                     </div>
                                 </div>
+                                -->
                             </c:if>
 
                             <div class="box-body">
