@@ -7,7 +7,6 @@ import com.slliver.common.constant.DeviceContant;
 import com.slliver.common.domain.AjaxRichResult;
 import com.slliver.common.paging.PageWapper;
 import com.slliver.entity.ApiBanner;
-import com.slliver.entity.ApiCreditCard;
 import com.slliver.entity.ApiLoanData;
 import com.slliver.entity.ApiLoanDetail;
 import com.slliver.service.ApiLoanDataService;
@@ -45,6 +44,19 @@ public class LoanController extends WebBaseController<ApiLoanData> {
         model.addAttribute("pagnation", pageWapper.getPagingHtml());
         return getViewPath("list");
     }
+
+    /** 注入消息生产者
+    @Autowired
+    private MessageSender messageSender;
+    @RequestMapping(value = "/test", method = {RequestMethod.POST, RequestMethod.GET})
+    public String list(Model model, BaseSearchCondition condition) {
+        // 设置RoutingKey，匹配message.*即可
+        messageSender.setRoutingKey("message.test");
+        // 发送消息
+        messageSender.sendDataToQueue("insert Queue");
+        return getViewPath("test");
+    }
+    **/
 
     @GetMapping(value = "/add")
     public String add(Model model) {

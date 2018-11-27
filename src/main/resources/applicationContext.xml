@@ -21,7 +21,7 @@
     <context:annotation-config />
 	
 	<!-- enable component scanning -->
-    <context:component-scan base-package="com.slliver.**.service,com.slliver.common.context"/>
+    <context:component-scan base-package="com.slliver.**.service,com.slliver.common.mq"/>
     
     <task:annotation-driven />
 
@@ -29,6 +29,7 @@
     <import resource="classpath*:applicationContext-dao.xml"/>
     <!--<import resource="classpath*:applicationContext-security.xml"/>-->
     <!--<import resource="classpath*:applicationContext-redis.xml"/>-->
+    <!--<import resource="classpath*:applicationContext-rabbitmq.xml"/>-->
 
     <bean id="messagesSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8" />
