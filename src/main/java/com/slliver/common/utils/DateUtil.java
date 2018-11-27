@@ -52,4 +52,9 @@ public class DateUtil {
         FastDateFormat fdf = FastDateFormat.getInstance(YYYY_MM_DD_HH_MM_SS);
         return fdf.format(date);
     }
+
+    public static String format(Date date){
+        FastDateFormat fdf = FastDateFormat.getInstance(YYYY_MM_DD_HH_MM_SS);
+        return fdf.format(date);
+    }
 }
