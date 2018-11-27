@@ -9,7 +9,6 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -58,7 +57,7 @@ public class SmsUtil {
     public static void main(String[] args) {
 //        String phone = "18600620828,18041551380,18040127055";
 //        String sendPhone = "13840986132,13555957682,18640922550,18040127055";
-//        send("18040127055", "1234");
+//        send("13942093278", "罗总啊 你太俗了。。。");
         String code = generateRandomCode();
 //        for(int x = 0; x < 500; x ++){
             System.out.println(code);
@@ -70,9 +69,9 @@ public class SmsUtil {
     public static final String SMS_UTF8_URL = "http://223.223.187.13:8080/eums/sms/utf8/send.do";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final String COMMAND = "pubMtxRes";
-    public static final String SIGN = "闪贷宝";
-    public static final String LOGIN = "jiedai";
-    public static final String PASSWORD = "8rxds9q3";
+    public static final String SIGN = "老铁帮";
+    public static final String LOGIN = "ruidun";
+    public static final String PASSWORD = "rbx4zmhx";
     private final static String CHARSET_UTF8 = "UTF-8";
 
 
