@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * @Description: 消息消费者(队列监听器)
  * @author: slliver
@@ -18,7 +20,17 @@ public class MessageConsumer implements MessageListener {
     @Override
     public void onMessage(Message message) {
         logger.info("receive message:{}",message);
-        String string = new String(message.getBody());
+        String string = null;
+        try {
+            string = new String(message.getBody(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         System.out.println("TODO 调用业务方法 == >> " + string);
+        try {
+            Thread.sleep(1000 * 20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

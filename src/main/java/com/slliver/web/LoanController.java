@@ -45,7 +45,7 @@ public class LoanController extends WebBaseController<ApiLoanData> {
         return getViewPath("list");
     }
 
-    /** 注入消息生产者
+    /**
     @Autowired
     private MessageSender messageSender;
     @RequestMapping(value = "/test", method = {RequestMethod.POST, RequestMethod.GET})

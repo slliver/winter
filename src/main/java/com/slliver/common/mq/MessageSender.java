@@ -3,7 +3,7 @@ package com.slliver.common.mq;
 import org.springframework.amqp.core.AmqpTemplate;
 
 /**
- * @Description: 用一句话具体描述类的功能
+ * @Description: 消息产生着
  * @author: slliver
  * @date: 2018/11/27 14:53
  * @version: 1.0
