@@ -29,6 +29,7 @@
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/loginIndex"/>
         <property name="successUrl" value="/index/index"/>
+        <!-- 用户访问未对其授权的资源时，所显示的连接 -->
         <property name="unauthorizedUrl" value="/loginIndex"/>
         <property name="filterChainDefinitionMap" ref="filterChainFactoryBean"/>
     </bean>

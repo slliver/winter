@@ -5,7 +5,6 @@ import com.slliver.common.spring.SpringContextHolder;
 import com.slliver.common.utils.CipherUtil;
 import com.slliver.entity.ApiUser;
 import com.slliver.service.ApiUserService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -21,13 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
- * @Description: 用一句话具体描述类的功能
+ * @Description: 自定义授权Realm
  * @author: slliver
  * @date: 2018/2/1 14:14
  * @version: 1.0
@@ -85,6 +81,8 @@ public class ShiroRealm extends AuthorizingRealm {
             SecurityUtils.getSubject().logout();
             return null;
         }
+
+
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         return info;
     }
