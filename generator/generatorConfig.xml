@@ -54,7 +54,7 @@
             <!--type="ANNOTATEDMAPPER" "XMLMAPPER" "MIXEDMAPPER"-->
             <!--<property name="rootInterface" value="com.zhongwang.common.mapper.ZWMapper"/>-->
         </javaClientGenerator>
-        <table tableName="index_message">
+        <table tableName="user_channel">
             <generatedKey column="pkid" sqlStatement="JDBC" identity="true"/>
         </table>
     </context>
