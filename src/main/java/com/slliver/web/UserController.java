@@ -3,6 +3,7 @@ package com.slliver.web;
 import com.slliver.base.controller.WebBaseController;
 import com.slliver.base.domain.BaseSearchCondition;
 import com.slliver.common.paging.PageWapper;
+import com.slliver.common.utils.CipherUtil;
 import com.slliver.entity.ApiUser;
 import com.slliver.service.ApiUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,14 @@ public class UserController extends WebBaseController<ApiUser> {
     @Override
     protected String getPath() {
         return "/user";
+    }
+
+    public static void main(String[] args) {
+        String userName = "robin";
+        String pwrsMD5 = CipherUtil.generatePassword("123456");
+        String salt = CipherUtil.createSalt();
+        String password = CipherUtil.createPwdEncrypt(userName, pwrsMD5, salt);
+        System.out.println(salt);
+        System.out.println("password == " + password);
     }
 }
