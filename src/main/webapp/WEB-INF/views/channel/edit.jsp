@@ -61,16 +61,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone" class="col-sm-2 control-label">推广链接</label>
+                                    <label for="popularizeUrl" class="col-sm-2 control-label">全流程推广链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control copy-input" name="url" id="popularizeUrl" value="${channel.url}" maxlength="200" placeholder="请输入推广链接" readonly/>
+                                        <input type="text" class="form-control copy-input" name="url" id="popularizeUrl" value="${channel.url}" maxlength="200" placeholder="请输入全流程推广链接" readonly/>
                                     </div>
-                                    <!--
-                                    <div class="col-sm-2">
-                                        <button type="button" id="btn-generate" name="generate" class="btn btn-primary btn-sm">生成连接</button>
-                                        <button type="button" id="btn-copy" name="generate" class="btn btn-primary btn-sm">复制连接</button>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="appPopularizeUrl" class="col-sm-2 control-label">App推广链接</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control copy-input" name="appUrl" id="appPopularizeUrl" value="${channel.appUrl}" maxlength="200" placeholder="请输入App推广链接" readonly/>
                                     </div>
-                                    -->
                                 </div>
 
                                 <div class="form-group">

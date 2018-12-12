@@ -31,6 +31,7 @@
                         <form id="addForm" method="POST" onsubmit="return false;" action="${ctx}/channel/update" class="form-horizontal">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <input type="hidden" name="serverPath" id="serverPath" value="${serverPath}"/>
+                            <input type="hidden" name="serverAppPath" id="serverAppPath" value="${serverAppPath}"/>
                             <!-- type 10：渠道 -->
                             <input type="hidden" name="type" value="10"/>
                             <div class="box-body">
@@ -60,13 +61,24 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone" class="col-sm-2 control-label">推广链接</label>
+                                    <label for="phone" class="col-sm-2 control-label">全流程推广链接</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control copy-input" name="url" id="popularizeUrl" value="" maxlength="200" placeholder="请输入推广链接"/>
+                                        <input type="text" class="form-control copy-input" name="url" id="popularizeUrl" value="" maxlength="200" placeholder="请输入全流程推广链接"/>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" id="btn-generate" name="generate" class="btn btn-primary btn-sm">生成连接</button>
-                                        <button type="button" id="btn-copy" name="generate" class="btn btn-primary btn-sm">复制连接</button>
+                                        <button type="button" id="btn-copy" name="btnCopyUrl" class="btn btn-primary btn-sm">复制连接</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone" class="col-sm-2 control-label">App推广链接</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control copy-input" name="appUrl" id="appPopularizeUrl" value="" maxlength="200" placeholder="请输入App推广链接"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" id="btn-generate-appUrl" name="generate" class="btn btn-primary btn-sm">生成连接</button>
+                                        <button type="button" id="btn-copy-appUrl" name="btnCopyAppUrl" class="btn btn-primary btn-sm">复制连接</button>
                                     </div>
                                 </div>
 
@@ -117,10 +129,44 @@
             copy: function(){
                 var popularizeUrl = $("#popularizeUrl").val();
                 if(popularizeUrl == "" || code == popularizeUrl){
-                    alert("还没生成推广连接，请先生成推广连接");
+                    alert("还没生成全流程推广连接，请先生成全流程推广连接");
                     return;
                 }
                 return $("#popularizeUrl").val();
+            },
+            afterCopy:function(){/* 复制成功后的操作 */
+                alert("复制成功");
+            }
+        });
+
+
+        $("#btn-generate-appUrl").unbind("click").bind("click", function (event) {
+            var code = $("#code").val();
+            if(code == "" || code == null){
+                alert("请输入渠道号");
+                $("#appPopularizeUrl").val('');
+                return;
+            }
+
+            var serverAppPath = $("#serverAppPath").val();
+            if(serverAppPath == "" || serverAppPath == null){
+                alert("获取服务器地址失败");
+                return;
+            }
+
+            var url = serverAppPath + "/" + "?channelNo=" + code;
+            $("#appPopularizeUrl").val(url);
+        });
+
+        $("#btn-copy-appUrl").zclip({
+            path: "${ctx}/assets/plugins/jquery.zclip/ZeroClipboard.swf",
+            copy: function(){
+                var popularizeUrl = $("#appPopularizeUrl").val();
+                if(popularizeUrl == "" || code == popularizeUrl){
+                    alert("还没生成App推广连接，请先生成App推广连接");
+                    return;
+                }
+                return $("#appPopularizeUrl").val();
             },
             afterCopy:function(){/* 复制成功后的操作 */
                 alert("复制成功");
@@ -148,9 +194,14 @@
 
     function generateUrl() {
         var code = $("#code").val();
+
         var serverPath = $("#serverPath").val();
         var url = serverPath + "/" + "?channelNo=" + code;
         $("#popularizeUrl").val(url);
+
+        var serverAppPath = $("#serverAppPath").val();
+        var appUrl = serverAppPath + "/" + "?channelNo=" + code;
+        $("#appPopularizeUrl").val(appUrl);
     }
 </script>
 </html>

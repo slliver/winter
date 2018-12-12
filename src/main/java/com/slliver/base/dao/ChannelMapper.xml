@@ -15,7 +15,7 @@
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
-        <result column="reserved1" property="reserved1" jdbcType="VARCHAR"/>
+        <result column="app_url" property="appUrl" jdbcType="VARCHAR"/>
         <result column="reserved2" property="reserved2" jdbcType="VARCHAR"/>
         <result column="flag_sort" property="flagSort" jdbcType="SMALLINT"/>
         <result column="flag_delete" property="flagDelete" jdbcType="SMALLINT"/>

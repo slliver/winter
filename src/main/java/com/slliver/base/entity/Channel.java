@@ -1,8 +1,9 @@
 package com.slliver.base.entity;
 
 import com.slliver.base.domain.BaseDomain;
-import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 @Table(name = "channel")
 public class Channel extends BaseDomain {
@@ -51,10 +52,13 @@ public class Channel extends BaseDomain {
      */
     private String remark;
 
+
+
     /**
-     * 预留字段
+     * app推广连接
      */
-    private String reserved1;
+    @Column(name = "app_url")
+    private String appUrl;
 
     /**
      * 预留字段
@@ -210,22 +214,12 @@ public class Channel extends BaseDomain {
         this.remark = remark;
     }
 
-    /**
-     * 获取预留字段
-     *
-     * @return reserved1 - 预留字段
-     */
-    public String getReserved1() {
-        return reserved1;
+    public String getAppUrl() {
+        return appUrl;
     }
 
-    /**
-     * 设置预留字段
-     *
-     * @param reserved1 预留字段
-     */
-    public void setReserved1(String reserved1) {
-        this.reserved1 = reserved1;
+    public void setAppUrl(String appUrl) {
+        this.appUrl = appUrl;
     }
 
     /**

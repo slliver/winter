@@ -40,7 +40,7 @@
 </script>
 <div class="login-box">
     <div class="login-logo">
-        <a href="javascript:void(0);"><b>Robin_Admin</b>LTE</a>
+        <a href="javascript:void(0);"><b>Ruidunys_Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -53,7 +53,7 @@
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" value="123456"/>
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" value=""/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">

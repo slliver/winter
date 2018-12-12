@@ -47,6 +47,7 @@ public class ChannelController extends WebBaseController<ApiChannel> {
     public String add(Model model) {
         // 获取nginx服务器的地址
         model.addAttribute("serverPath", Constant.SERVER_IMAGE_ADDRESS);
+        model.addAttribute("serverAppPath", Constant.SERVER_APP_ADDRESS);
         return getViewPath("add");
     }
 
@@ -82,6 +83,7 @@ public class ChannelController extends WebBaseController<ApiChannel> {
     public String edit(@PathVariable String pkid, Model model) {
         // 获取nginx服务器的地址
         model.addAttribute("serverPath", Constant.SERVER_IMAGE_ADDRESS);
+        model.addAttribute("serverAppPath", Constant.SERVER_APP_ADDRESS);
         model.addAttribute("channel", this.channelService.selectByPkid(pkid));
         return getViewPath("edit");
     }

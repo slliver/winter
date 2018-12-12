@@ -130,6 +130,11 @@ public final class Constant {
      */
     public static final String SERVER_IMAGE_ADDRESS = "http://twp.ruidunys.com:8089";
 
+    /**
+     * H5服务
+     */
+    public static final String SERVER_APP_ADDRESS = "http://reg.ruidunys.com:8090";
+
 
     /**
      * 系统中资源类型
