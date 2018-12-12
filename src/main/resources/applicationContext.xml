@@ -29,7 +29,7 @@
     <import resource="classpath*:applicationContext-dao.xml"/>
     <!--<import resource="classpath*:applicationContext-security.xml"/>-->
     <!--<import resource="classpath*:applicationContext-redis.xml"/>-->
-    <import resource="classpath*:applicationContext-rabbitMQ.xml"/>
+    <!--<import resource="classpath*:applicationContext-rabbitMQ.xml"/>-->
 
     <bean id="messagesSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8" />
