@@ -47,7 +47,8 @@
                                         <th>渠道名称</th>
                                         <th>负责人</th>
                                         <th>联系电话</th>
-                                        <th>推广连接</th>
+                                        <th>全流程推广连接</th>
+                                        <th>App推广连接</th>
                                         <th>创建时间</th>
                                     </tr>
                                     </thead>
@@ -65,6 +66,7 @@
                                                     <td>${item.chargeUser}</td>
                                                     <td>${item.phone}</td>
                                                     <td>${item.url}</td>
+                                                    <td>${item.appUrl}</td>
                                                     <td><fmt:formatDate value='${item.makeTime}' pattern='yyyy-MM-dd HH:mm'/></td>
                                                 </tr>
                                             </c:forEach>
