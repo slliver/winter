@@ -30,7 +30,6 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <!-- /.box-header -->
                             <div class="dataTables_filter" id="searchDiv" style="margin-top: 10px !important; position: relative !important; padding-right: 10px;">
                                 <input placeholder="请输入姓名" name="name" class="form-control" type="text"
                                        likeOption="true" value="${condition.name}" maxlength="10"/>
@@ -38,6 +37,11 @@
                                        likeOption="true" value="${condition.phone}" maxlength="10"/>
                                 <input placeholder="请输入渠道号" name="channelNo" class="form-control" type="text"
                                        likeOption="true" value="${condition.channelNo}" maxlength="20"/>
+                                <select name="device" id="device" class="form-control" style="min-width: 120px; width: auto;display:inline-block;">
+                                    <c:forEach var="item" items="${deviceList}">
+                                        <option value="${item.key}" <c:if test="${condition.device == item.key}">selected</c:if> >${item.value}</option>
+                                    </c:forEach>
+                                </select>
                                 <input type="text" maxlength="40" name="startTime" id="startTime" value="${condition.startTime}" placeholder="注册开始日期" class="form-control datepicker_ymd"/>
                                 <input type="text" maxlength="40" name="endTime" id="endTime" value="${condition.endTime}" placeholder="注册结束日期" class="form-control datepicker_ymd"/>
 
@@ -74,6 +78,7 @@
                                         <th>性别</th>
                                         <th>手机号码</th>
                                         <th>渠道号</th>
+                                        <th>注册设备</th>
                                         <th>注册时间</th>
                                     </tr>
                                     </thead>
@@ -99,6 +104,7 @@
                                                 </td>
                                                 <td>${item.phone}</td>
                                                 <td>${item.channelNo}</td>
+                                                <td>${robinFn:getDeviceValue(item.device)}</td>
                                                 <td><fmt:formatDate value='${item.makeTime}' pattern='yyyy-MM-dd HH:mm' /></td>
                                                 </tr>
                                             </c:forEach>

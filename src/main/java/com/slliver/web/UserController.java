@@ -2,6 +2,7 @@ package com.slliver.web;
 
 import com.slliver.base.controller.WebBaseController;
 import com.slliver.base.domain.BaseSearchCondition;
+import com.slliver.common.constant.DeviceContant;
 import com.slliver.common.paging.PageWapper;
 import com.slliver.common.utils.CipherUtil;
 import com.slliver.entity.ApiUser;
@@ -31,6 +32,8 @@ public class UserController extends WebBaseController<ApiUser> {
         model.addAttribute("dataList", pageWapper.getList());
         model.addAttribute("pagnation", pageWapper.getPagingHtml());
         model.addAttribute("condition", condition);
+        // 设备类型
+        model.addAttribute("deviceList", DeviceContant.getDeviceMap());
         return getViewPath("list");
     }
 

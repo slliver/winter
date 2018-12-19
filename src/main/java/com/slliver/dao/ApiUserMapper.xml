@@ -16,6 +16,9 @@
         <if test="channelNo !=null and channelNo !=''">
             and u.channel_no like concat("%", #{channelNo}, "%")
         </if>
+        <if test="device !=null and device != 0">
+            and u.device = #{device}
+        </if>
         <if test="startTime != null and startTime != ''">
             <![CDATA[
                 AND DATE_FORMAT(u.make_time,'%Y-%m-%d') >= #{startTime}
