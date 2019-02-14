@@ -1,31 +1,23 @@
 package com.slliver.service;
 
 import com.github.pagehelper.PageHelper;
-import com.slliver.base.domain.BaseDomain;
 import com.slliver.base.domain.BaseSearchCondition;
+import com.slliver.base.domain.BaseSearchConditionWithoutPagination;
 import com.slliver.base.service.BaseService;
 import com.slliver.common.Constant;
 import com.slliver.common.paging.PageWapper;
-import com.slliver.common.utils.RedisUtil;
 import com.slliver.dao.ApiLoanDataMapper;
 import com.slliver.entity.ApiBanner;
 import com.slliver.entity.ApiLoanData;
 import com.slliver.entity.ApiLoanDetail;
 import com.slliver.entity.ApiResource;
-import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.ComparatorUtils;
-import org.apache.commons.collections.comparators.ComparableComparator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.BoundListOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Description: 用一句话具体描述类的功能
@@ -75,6 +67,13 @@ public class ApiLoanDataService extends BaseService<ApiLoanData> {
         PageHelper.startPage(pageNum, pageSize);
         List<ApiLoanData> loanDataList = this.mapper.selectListByApi(condition);
         return new PageWapper<>(loanDataList);
+    }
+
+    /**
+     * 极速贷信息列表不分页
+     */
+    public List<ApiLoanData> selectListByApiNoPagination(BaseSearchConditionWithoutPagination condition) {
+        return this.mapper.selectListByApiNoPagination(condition);
     }
 
 

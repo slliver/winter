@@ -1,6 +1,7 @@
 package com.slliver.dao;
 
 import com.slliver.base.domain.BaseSearchCondition;
+import com.slliver.base.domain.BaseSearchConditionWithoutPagination;
 import com.slliver.common.mapper.RobinMapper;
 import com.slliver.entity.ApiLoanData;
 
@@ -11,4 +12,6 @@ public interface ApiLoanDataMapper extends RobinMapper<ApiLoanData> {
     List<ApiLoanData> selectListByPage(BaseSearchCondition condition);
 
     List<ApiLoanData> selectListByApi(BaseSearchCondition condition);
+
+    List<ApiLoanData> selectListByApiNoPagination(BaseSearchConditionWithoutPagination condition);
 }
