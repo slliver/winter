@@ -56,7 +56,7 @@
         FROM
             loan_data l
         LEFT JOIN resource r ON l.logo_pkid = r.pkid
-            where 1= 1
+            where l.org_name != '老铁帮'
             <if test="device !=null and device !=''">
                 and l.device in(0, #{device})
             </if>
