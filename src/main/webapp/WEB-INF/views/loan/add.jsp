@@ -73,10 +73,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="des" class="col-sm-2 control-label">机构简介</label>
+                                    <label for="des" class="col-sm-2 control-label">产品简介</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="des" id="des" maxlength="100"
-                                               placeholder="请输入机构简介"/>
+                                               placeholder="请输入产品简介"/>
                                     </div>
                                 </div>
                                 <div class="form-group">

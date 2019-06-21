@@ -17,7 +17,7 @@ import java.util.Map;
 public class ResourceUtil {
 
     //public static final String UPLOAD_ROOT_PATH = "d:\\robin\\upload";
-    //public static final String SERVER_PATH = "d:\\robin\\upload";
+//    public static final String SERVER_PATH = "G:\\robin\\upload";
 
     public static final String UPLOAD_ROOT_PATH = "/home/winter/upload";
     public static final String SERVER_PATH = "/home/winter/upload";

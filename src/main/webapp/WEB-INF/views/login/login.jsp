@@ -49,7 +49,7 @@
         </p>
         <form action="#" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="userName" id="userName" placeholder="请输入用户名" value="robin"/>
+                <input type="text" class="form-control" name="userName" id="userName" placeholder="请输入用户名" value=""/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

@@ -112,9 +112,19 @@ public class LoanController extends WebBaseController<ApiLoanData> {
             }
         }
         model.addAttribute("loan", loan);
+        // 这里是结果已经排除当前已经绑定的banner
         List<ApiBanner> bannerList = this.bannerService.selectByBussinessType(Constant.BANNER_LOAN);
         if (CollectionUtils.isNotEmpty(bannerList)) {
             // 如果当前已经绑定banner，加入进去
+            if (loan != null) {
+                String bannerPkid = loan.getBannerPkid();
+                if (StringUtils.isNotBlank(bannerPkid)) {
+                    ApiBanner banner = bannerService.selectByPkid(bannerPkid);
+                    bannerList.add(banner);
+                }
+            }
+        }else{
+            // 没有可以选择的，要看当前是否已经绑定banner
             if (loan != null) {
                 String bannerPkid = loan.getBannerPkid();
                 if (StringUtils.isNotBlank(bannerPkid)) {

@@ -50,6 +50,7 @@
                                     <th>Logo</th>
                                     <th>是否绑定banner</th>
                                     <th>机构名称</th>
+                                    <th>产品简介</th>
                                     <th>借款金额</th>
                                     <th>借款期限</th>
                                     <th>参考月利率</th>
@@ -90,6 +91,7 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>${item.orgName}</td>
+                                                <td>${item.des}</td>
                                                 <td>${item.loanAmount}</td>
                                                 <td>${item.loanTime}</td>
                                                 <td>${item.monthlyInterestRate}</td>
